@@ -1,53 +1,39 @@
-/**
- * Created by aterikov on 11/17/15.
+/*
+ *  HuffmanFrequencyTable.java
+ *  TCSS 342 - Autumn 2015
+ *
+ *  Assignment 2 - Implementing Huffman Tree Coding.
+ *  Alex Terikov (teraliv@uw.edu)
+ *  11/22/15
  */
+
+
 public class HuffmanFrequencyTable {
+
     public static void main(String[] args) {
 
-        String text = "Hello World!";
+        String text = "My Test works totally fine";
 
 
-        char[] characters = new char[11];
-        int[] frequency = new int[11];
-
-        int index = 0;
-        int tableSize = 0;
-        char character;
-
-
-//        for (int i = 0; i < text.length(); i++) {
-//
-//            character = text.charAt(i);
-//
-//            if (!charIsInTable(characters, character)) {
-//
-//                characters[index] = character;
-//                frequency[index] = findCharOccurences(text, character, i);
-//                index++;
-//                tableSize++;
-//            }
-//        }
-
-
-//        int temp = frequency[0];
-//        frequency[0] = frequency[2];
-//        frequency[2] = temp;
-
-//        for (int i = 0; i < tableSize; i++) {
-//            System.out.println(frequency[i]);
-//        }
-
-//        Object arrays[] = new Object[] {characters, frequency};
-//
-//        for (int i = 0; i < tableSize; i++) {
-//            System.out.printf("%c - %d\n", characters[i], frequency[i]);
-//        }
-
+        int[] frequency;
+        char[] characters;
+        int tableSize;
 
 
         makeFrequencyTable(text);
 
+        Object[] tableData = makeFrequencyTable(text);
+
+        frequency =  (int[]) tableData[0];
+        characters = (char[]) tableData[1];
+        tableSize = (int) tableData[2];
+
+        for (int i = 0; i < tableSize; i++) {
+            System.out.printf("%c - %d\n", characters[i], frequency[i]);
+        }
+
 //        sortFrequencyTable(frequency, characters, tableSize);
+
 
     }
 
@@ -72,7 +58,7 @@ public class HuffmanFrequencyTable {
             }
         }
 
-        return new Object[] {frequency, characters};
+        return new Object[] {frequency, characters, tableSize};
     }
 
     private static int findCharOccurences(String theText, char theChar, int theIndex) {
@@ -125,9 +111,9 @@ public class HuffmanFrequencyTable {
             }
         }
 
-        for (int k = 0; k < size; k++) {
+        /*for (int k = 0; k < size; k++) {
             System.out.printf("%d - %c\n", theFrequency[k], theCharacters[k]);
-        }
+        }*/
     }
 
 }
