@@ -7,6 +7,8 @@
  *  11/22/15
  */
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class HuffmanFrequencyTable {
 
@@ -14,30 +16,26 @@ public class HuffmanFrequencyTable {
 
         String text = "My Test works totally fine";
 
+        List<HuffmanTreeNode> leaves = new ArrayList<HuffmanTreeNode>();
 
-        int[] frequency;
-        char[] characters;
-        int tableSize;
+        leaves = makeFrequencyTable(text, leaves);
+
+        HuffmanTree tree = new HuffmanTree(leaves);
+
+        tree.makeHuffmanTree();
 
 
-        makeFrequencyTable(text);
-
-        Object[] tableData = makeFrequencyTable(text);
-
-        frequency =  (int[]) tableData[0];
-        characters = (char[]) tableData[1];
-        tableSize = (int) tableData[2];
-
-        for (int i = 0; i < tableSize; i++) {
-            System.out.printf("%c - %d\n", characters[i], frequency[i]);
-        }
-
-//        sortFrequencyTable(frequency, characters, tableSize);
+//        for (int i = 0; i < leaves.size(); i++) {
+//            System.out.printf("%c - %d\n", leaves.get(i).getData(), leaves.get(i).getFrequency());
+//        }
 
 
     }
 
-    private static Object[] makeFrequencyTable(String text) {
+
+
+
+    private static List<HuffmanTreeNode> makeFrequencyTable(String text, List<HuffmanTreeNode> leaves) {
 
         int[] frequency = new int[text.length()];
         char[] characters = new char[text.length()];
@@ -50,15 +48,17 @@ public class HuffmanFrequencyTable {
 
             currentChar = text.charAt(i);
 
+            // TODO: 11/22/15 reimplement if char is exists with ArrayList
             if (!charIsInTable(characters, currentChar)) {
                 characters[index] = currentChar;
                 frequency[index] = findCharOccurences(text, currentChar, i);
+                leaves.add(new HuffmanTreeNode(currentChar, findCharOccurences(text, currentChar, i)));
                 index++;
                 tableSize++;
             }
         }
 
-        return new Object[] {frequency, characters, tableSize};
+        return leaves;
     }
 
     private static int findCharOccurences(String theText, char theChar, int theIndex) {

@@ -7,7 +7,6 @@
  *  11/22/15
  */
 
-
 public class HuffmanTreeNode {
 
     private char myData;
