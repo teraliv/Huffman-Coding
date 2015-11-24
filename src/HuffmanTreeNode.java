@@ -9,12 +9,12 @@
 
 public class HuffmanTreeNode {
 
-    private char myData;
+    private Character myData;
     private int myFrequency;
     private HuffmanTreeNode myLeft;
     private HuffmanTreeNode myRight;
 
-    public HuffmanTreeNode(char theData, int theFrequency) {
+    public HuffmanTreeNode(Character theData, int theFrequency) {
         myData = theData;
         myFrequency = theFrequency;
         myLeft = null;
@@ -22,7 +22,7 @@ public class HuffmanTreeNode {
     }
 
 
-    public char getData() {
+    public Character getData() {
         return myData;
     }
 
@@ -42,7 +42,7 @@ public class HuffmanTreeNode {
     }
 
 
-    public void setData(char theData) {
+    public void setData(Character theData) {
         myData = theData;
     }
 

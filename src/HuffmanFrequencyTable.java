@@ -20,9 +20,13 @@ public class HuffmanFrequencyTable {
 
         leaves = makeFrequencyTable(text, leaves);
 
+        printTable(leaves);
+
         HuffmanTree tree = new HuffmanTree(leaves);
 
-        tree.makeHuffmanTree();
+        HuffmanTreeNode root = tree.makeHuffmanTree();
+
+//        System.out.println(root.toString());
 
 
 //        for (int i = 0; i < leaves.size(); i++) {
@@ -116,4 +120,16 @@ public class HuffmanFrequencyTable {
         }*/
     }
 
+    private static void printTable(List<HuffmanTreeNode> theLeaves) {
+
+        System.out.println("=======================================");
+        System.out.println("char        frequency       code");
+        System.out.println("---------------------------------------");
+
+        for (int i = 0; i < theLeaves.size(); i++) {
+            System.out.printf("%-11c %-15d\n", theLeaves.get(i).getData(), theLeaves.get(i).getFrequency());
+        }
+
+        System.out.println("=======================================");
+    }
 }

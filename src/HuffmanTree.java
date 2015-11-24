@@ -1,5 +1,5 @@
 /*
- *  HuffmanTreeNode.java
+ *  HuffmanTree.java
  *  TCSS 342 - Autumn 2015
  *
  *  Assignment 2 - Implementing Huffman Tree Coding.
@@ -24,25 +24,49 @@ public class HuffmanTree {
         }
     }
 
-    public void makeHuffmanTree() {
+    public HuffmanTreeNode makeHuffmanTree() {
 
-        System.out.println(findMin(0));
+        int minA, minB, newFrequency;
+        HuffmanTreeNode newNode;
 
-//        while (myLeaves.size() > 1) {
-//
-//        }
+        while (myLeaves.size() > 1) {
+            minA = findMin();
+            HuffmanTreeNode nodeA = myLeaves.get(minA);
+            myLeaves.remove(minA);
 
-    }
+            minB = findMin();
+            HuffmanTreeNode nodeB = myLeaves.get(minB);
+            myLeaves.remove(minB);
 
-    private int findMin(int theStartIndex) {
+            newNode = new HuffmanTreeNode(null, nodeA.getFrequency() + nodeB.getFrequency());
+            newNode.setLeft(nodeA);
+            newNode.setRight(nodeB);
 
-        int min = myLeaves.get(theStartIndex).getFrequency();
-
-        for (int i = theStartIndex; i < myLeaves.size(); i++) {
+            myLeaves.add(newNode);
 
         }
 
+//        System.out.println(myLeaves.get(0).toString());
 
-        return  min;
+        return myLeaves.get(0);
+    }
+
+    private int findMin() {
+
+        int next;
+        int min = myLeaves.get(0).getFrequency();
+        int indexOfMin = 0;
+
+        for (int i = 0; i < myLeaves.size() - 1; i++) {
+            next = myLeaves.get(i + 1).getFrequency();
+
+            if (min >= next) {
+                min = next;
+                indexOfMin = i + 1;
+            }
+        }
+
+
+        return indexOfMin;
     }
 }
