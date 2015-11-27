@@ -14,7 +14,9 @@ public class HuffmanTree {
     private List<HuffmanTreeNode> myLeaves;
 
     public HuffmanTree(List<HuffmanTreeNode> theLeaves) {
+
         myLeaves = theLeaves;
+        makeHuffmanTree();
     }
 
     public void printList() {
@@ -24,7 +26,32 @@ public class HuffmanTree {
         }
     }
 
-    public HuffmanTreeNode makeHuffmanTree() {
+//    public HuffmanTreeNode makeHuffmanTree() {
+//
+//        int minA, minB, newFrequency;
+//        HuffmanTreeNode newNode;
+//
+//        while (myLeaves.size() > 1) {
+//            minA = findMin();
+//            HuffmanTreeNode nodeA = myLeaves.get(minA);
+//            myLeaves.remove(minA);
+//
+//            minB = findMin();
+//            HuffmanTreeNode nodeB = myLeaves.get(minB);
+//            myLeaves.remove(minB);
+//
+//            newNode = new HuffmanTreeNode(null, nodeA.getFrequency() + nodeB.getFrequency());
+//            newNode.setLeft(nodeA);
+//            newNode.setRight(nodeB);
+//
+//            myLeaves.add(newNode);
+//
+//        }
+//
+//        return myLeaves.get(0);
+//    }
+
+    public  void makeHuffmanTree() {
 
         int minA, minB, newFrequency;
         HuffmanTreeNode newNode;
@@ -45,9 +72,9 @@ public class HuffmanTree {
             myLeaves.add(newNode);
 
         }
+    }
 
-//        System.out.println(myLeaves.get(0).toString());
-
+    public HuffmanTreeNode getHuffmanTree() {
         return myLeaves.get(0);
     }
 
@@ -65,7 +92,6 @@ public class HuffmanTree {
                 indexOfMin = i + 1;
             }
         }
-
 
         return indexOfMin;
     }

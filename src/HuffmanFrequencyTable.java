@@ -8,7 +8,9 @@
  */
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HuffmanFrequencyTable {
 
@@ -20,22 +22,27 @@ public class HuffmanFrequencyTable {
 
         leaves = makeFrequencyTable(text, leaves);
 
-        printTable(leaves);
+
+        // LinkedHashMap is used to keep original ordering of chars
+        Map<Character, Integer> charFreqTable = new LinkedHashMap<>();
+
+        for (int i = 0; i < leaves.size(); i++) {
+            charFreqTable.put(leaves.get(i).getData(), leaves.get(i).getFrequency());
+        }
 
         HuffmanTree tree = new HuffmanTree(leaves);
 
-        HuffmanTreeNode root = tree.makeHuffmanTree();
+        HuffmanTreeNode root = tree.getHuffmanTree();
 
-//        System.out.println(root.toString());
+        Encoder enc = new Encoder(root);
+        enc.inOrderTraversal(root);
 
+        Map<Character, String> bitCode = enc.getBitCodeTable();
 
-//        for (int i = 0; i < leaves.size(); i++) {
-//            System.out.printf("%c - %d\n", leaves.get(i).getData(), leaves.get(i).getFrequency());
-//        }
-
+        printTable(charFreqTable, bitCode);
+        makeHuffmanCode(text, bitCode);
 
     }
-
 
 
 
@@ -120,16 +127,47 @@ public class HuffmanFrequencyTable {
         }*/
     }
 
-    private static void printTable(List<HuffmanTreeNode> theLeaves) {
+    private static void printTable(Map<Character, Integer> theFrequency, Map<Character, String> theBitCode) {
 
         System.out.println("=======================================");
         System.out.println("char        frequency       code");
         System.out.println("---------------------------------------");
 
-        for (int i = 0; i < theLeaves.size(); i++) {
-            System.out.printf("%-11c %-15d\n", theLeaves.get(i).getData(), theLeaves.get(i).getFrequency());
+        for (Character key : theFrequency.keySet()) {
+            System.out.printf("%-11c %-15d %-15s\n", key, theFrequency.get(key), theBitCode.get(key));
         }
 
         System.out.println("=======================================");
     }
+
+    private static void makeHuffmanCode(String theMessage, Map<Character, String> theBitCode) {
+
+        StringBuilder huffmanCode = new StringBuilder();
+
+        int size = 0;
+
+        for (int i = 0; i < theMessage.length(); i++) {
+            huffmanCode.append(theBitCode.get(theMessage.charAt(i)));
+            size += theBitCode.get(theMessage.charAt(i)).length();
+        }
+
+        System.out.println("Encoded bit stream: ");
+        System.out.println(huffmanCode);
+        System.out.println("Total number of bits without Huffman coding: " + theMessage.length() * 16);
+        System.out.println("Total number of bits with Huffman coding: " + size);
+
+    }
+
+//    private static void printTable(List<HuffmanTreeNode> theLeaves) {
+//
+//        System.out.println("=======================================");
+//        System.out.println("char        frequency       code");
+//        System.out.println("---------------------------------------");
+//
+//        for (int i = 0; i < theLeaves.size(); i++) {
+//            System.out.printf("%-11c %-15d\n", theLeaves.get(i).getData(), theLeaves.get(i).getFrequency());
+//        }
+//
+//        System.out.println("=======================================");
+//    }
 }
