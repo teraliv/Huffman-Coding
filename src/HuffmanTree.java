@@ -26,34 +26,10 @@ public class HuffmanTree {
         }
     }
 
-//    public HuffmanTreeNode makeHuffmanTree() {
-//
-//        int minA, minB, newFrequency;
-//        HuffmanTreeNode newNode;
-//
-//        while (myLeaves.size() > 1) {
-//            minA = findMin();
-//            HuffmanTreeNode nodeA = myLeaves.get(minA);
-//            myLeaves.remove(minA);
-//
-//            minB = findMin();
-//            HuffmanTreeNode nodeB = myLeaves.get(minB);
-//            myLeaves.remove(minB);
-//
-//            newNode = new HuffmanTreeNode(null, nodeA.getFrequency() + nodeB.getFrequency());
-//            newNode.setLeft(nodeA);
-//            newNode.setRight(nodeB);
-//
-//            myLeaves.add(newNode);
-//
-//        }
-//
-//        return myLeaves.get(0);
-//    }
 
-    public  void makeHuffmanTree() {
+    private void makeHuffmanTree() {
 
-        int minA, minB, newFrequency;
+        int minA, minB;
         HuffmanTreeNode newNode;
 
         while (myLeaves.size() > 1) {

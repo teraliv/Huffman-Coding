@@ -27,57 +27,27 @@ public class Encoder {
     }
 
 
-
-//    public void inOrderTraversal(HuffmanTreeNode theRoot, Character theChar) {
-//
-//        if (theRoot.getLeft() != null) {
-//            bitCode.append(0);
-//            inOrderTraversal(theRoot.getLeft(), theChar);
-//            if (!myFound)
-//                bitCode.deleteCharAt(bitCode.length() - 1);
-//        }
-//
-//        if (theRoot.getData() == theChar) {
-//            System.out.println(theChar);
-//            myFound = true;
-//            return;
-//        }
-//
-//        if (theRoot.getRight() != null && !myFound) {
-//            bitCode.append(1);
-//            inOrderTraversal(theRoot.getRight(),theChar);
-//            if (!myFound)
-//                bitCode.deleteCharAt(bitCode.length() - 1);
-//        }
-//
-//    }
-
-    public void inOrderTraversal(HuffmanTreeNode theRoot) {
+    public void makeHuffmanBitCodeTable(HuffmanTreeNode theRoot) {
 
         if (theRoot.getLeft() != null) {
             bitCode.append(0);
-            inOrderTraversal(theRoot.getLeft());
+            makeHuffmanBitCodeTable(theRoot.getLeft());
             bitCode.deleteCharAt(bitCode.length() - 1);
         }
 
         if (theRoot.getData() != null) {
-            //System.out.println(theRoot.getData());
-            //System.out.println(bitCode);
             String st = String.valueOf(bitCode);
             bitCodeTable.put(theRoot.getData(), st);
         }
 
         if (theRoot.getRight() != null && !myFound) {
             bitCode.append(1);
-            inOrderTraversal(theRoot.getRight());
+            makeHuffmanBitCodeTable(theRoot.getRight());
             bitCode.deleteCharAt(bitCode.length() - 1);
         }
 
     }
 
-    public void printBitCode() {
-        System.out.println(bitCode);
-    }
 
     public void printBitCodeTable() {
 
@@ -86,7 +56,8 @@ public class Encoder {
         }
     }
 
-    public Map<Character, String> getBitCodeTable() {
+
+    public Map<Character, String> getBitCodeData() {
         return bitCodeTable;
     }
 
