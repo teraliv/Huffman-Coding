@@ -9,20 +9,34 @@
 
 public class Decoder {
 
+    // A string to be decoded.
     private String myMessage;
+
+    // A root of a huffman tree.
     private HuffmanTreeNode myRoot;
 
+    /**
+     * Constructs decoder for a huffman tree message.
+     *
+     * @param theMessage - the string to be decoded.
+     * @param theRoot - the root of a huffman tree.
+     */
     public Decoder(String theMessage, HuffmanTreeNode theRoot) {
         myMessage = theMessage;
         myRoot = theRoot;
     }
 
+    /**
+     * A method to print a string to be decoded.
+     */
     public void printMessage() {
         System.out.println(myMessage);
     }
 
-
-    public void decodeMessage() {
+    /**
+     * A method to decode message using huffman tree.
+     */
+    public String decodeMessage() {
 
         HuffmanTreeNode subTree = myRoot;
         StringBuilder message = new StringBuilder();
@@ -54,6 +68,6 @@ public class Decoder {
             }
         }
 
-        System.out.println("\nDecoded message: " + message);
+        return message.toString();
     }
 }

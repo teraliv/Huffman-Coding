@@ -11,14 +11,24 @@ import java.util.List;
 
 public class HuffmanTree {
 
+    // List of HuffmanTree Nodes with data: characters and frequency
     private List<HuffmanTreeNode> myLeaves;
 
+
+    /**
+     * Constructs Huffman Tree.
+     *
+     * @param theLeaves - list of Huffman Tree Nodes.
+     */
     public HuffmanTree(List<HuffmanTreeNode> theLeaves) {
 
         myLeaves = theLeaves;
         makeHuffmanTree();
     }
 
+    /**
+     * A method to print Huffman Tree Nodes character data and frequency.
+     */
     public void printList() {
 
         for (int i = 0; i < myLeaves.size(); i++) {
@@ -27,6 +37,9 @@ public class HuffmanTree {
     }
 
 
+    /**
+     * A method to make a Huffman Tree
+     */
     private void makeHuffmanTree() {
 
         int minA, minB;
@@ -50,10 +63,20 @@ public class HuffmanTree {
         }
     }
 
+    /**
+     * A method got get a root of a Huffman Tree.
+     *
+     * @return - returns the root of a Huffman Tree.
+     */
     public HuffmanTreeNode getHuffmanTree() {
         return myLeaves.get(0);
     }
 
+    /**
+     * A helper method to find the minimum frequency value.
+     *
+     * @return - returns the list index with the minimum frequency value.
+     */
     private int findMin() {
 
         int next;

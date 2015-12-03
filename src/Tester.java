@@ -7,47 +7,79 @@
  *  11/27/15
  */
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.Map;
 
 public class Tester {
 
+    private static PrintWriter writer = null;
+
     public static void main(String[] args) {
 
-        String message = "eeyjjjj";
+        try {
+            writer = new PrintWriter(new FileOutputStream("output.txt"));
 
-        HuffmanFrequencyTable hft = new HuffmanFrequencyTable(message);
 
-        HuffmanTree ht = new HuffmanTree(hft.getLeaves());
+            String message = args[0];
 
-        HuffmanTreeNode subTree = ht.getHuffmanTree();
+            HuffmanFrequencyTable hft = new HuffmanFrequencyTable(message);
 
-        Encoder encoder = new Encoder(subTree);
-        encoder.makeHuffmanBitCodeTable(subTree);
+            HuffmanTree ht = new HuffmanTree(hft.getLeaves());
 
-        Map<Character, String> bitCode = encoder.getBitCodeData();
-        printTable(hft.getCharFrequency(), bitCode);
+            HuffmanTreeNode subTree = ht.getHuffmanTree();
 
-        String huffmanCode = makeHuffmanCode(message, bitCode);
+            Encoder encoder = new Encoder(subTree);
 
-        Decoder decoder = new Decoder(huffmanCode, subTree);
-        decoder.decodeMessage();
+            Map<Character, String> bitCode = encoder.getBitCodeData();
+            printTable(hft.getCharFrequency(), bitCode);
+
+            String huffmanCode = makeHuffmanCode(message, bitCode);
+
+            Decoder decoder = new Decoder(huffmanCode, subTree);
+
+            String decodedMessage = "Decoded string: " + decoder.decodeMessage();
+            System.out.println(decodedMessage);
+            writer.println(decodedMessage);
+
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            if (writer != null)
+                writer.close();
+        }
+
+
     }
 
 
-    public static void printTable(Map<Character, Integer> theFrequency, Map<Character, String> theBitCode) {
+    /**
+     * A method to print huffman tree data.
+     */
+    private static void printTable(Map<Character, Integer> theFrequency, Map<Character, String> theBitCode) {
 
         System.out.println("=======================================");
         System.out.println("char        frequency       code");
         System.out.println("---------------------------------------");
 
+        writer.println("=======================================");
+        writer.println("char        frequency       code");
+        writer.println("---------------------------------------");
+
         for (Character key : theFrequency.keySet()) {
             System.out.printf("%-11c %-15d %-15s\n", key, theFrequency.get(key), theBitCode.get(key));
+            writer.printf("%-11c %-15d %-15s\n", key, theFrequency.get(key), theBitCode.get(key));
         }
 
         System.out.println("=======================================");
+        writer.println("=======================================");
     }
 
-
+    /**
+     * A method to make huffman code.
+     */
     private static String makeHuffmanCode(String theMessage, Map<Character, String> theBitCode) {
 
         StringBuilder huffmanCode = new StringBuilder();
@@ -63,6 +95,11 @@ public class Tester {
         System.out.println(huffmanCode);
         System.out.println("Total number of bits without Huffman coding: " + theMessage.length() * 16);
         System.out.println("Total number of bits with Huffman coding: " + size);
+
+        writer.println("Encoded bit stream: ");
+        writer.println(huffmanCode);
+        writer.println("Total number of bits without Huffman coding: " + theMessage.length() * 16);
+        writer.println("Total number of bits with Huffman coding: " + size);
 
         return huffmanCode.toString();
     }

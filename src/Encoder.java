@@ -13,42 +13,63 @@ import java.util.Map;
 
 public class Encoder {
 
+    // The root of Huffman Tree
     private HuffmanTreeNode myRoot;
+
+    // Trigger to point that dat been find.
     private boolean myFound;
+
+    // The bit code of a huffman tree.
     private StringBuilder bitCode;
+
+    // Map with a char data and its bit code
     private Map<Character, String> bitCodeTable;
 
 
+    /**
+     * Constructs an encoder for Huffman Tree.
+     *
+     * @param theRoot - the root of Huffman Tree.
+     */
     public Encoder(HuffmanTreeNode theRoot) {
         myRoot = theRoot;
         bitCode = new StringBuilder();
         myFound = false;
         bitCodeTable = new HashMap<>();
+
+        makeHuffmanBitCodeTable(myRoot);
     }
 
 
-    public void makeHuffmanBitCodeTable(HuffmanTreeNode theRoot) {
+    /**
+     * A helper method to make huffman bit code table.
+     *
+     * @param myRoot - the root of a huffman tree.
+     */
+    private void makeHuffmanBitCodeTable(HuffmanTreeNode myRoot) {
 
-        if (theRoot.getLeft() != null) {
+        if (myRoot.getLeft() != null) {
             bitCode.append(0);
-            makeHuffmanBitCodeTable(theRoot.getLeft());
+            makeHuffmanBitCodeTable(myRoot.getLeft());
             bitCode.deleteCharAt(bitCode.length() - 1);
         }
 
-        if (theRoot.getData() != null) {
+        if (myRoot.getData() != null) {
             String st = String.valueOf(bitCode);
-            bitCodeTable.put(theRoot.getData(), st);
+            bitCodeTable.put(myRoot.getData(), st);
         }
 
-        if (theRoot.getRight() != null && !myFound) {
+        if (myRoot.getRight() != null && !myFound) {
             bitCode.append(1);
-            makeHuffmanBitCodeTable(theRoot.getRight());
+            makeHuffmanBitCodeTable(myRoot.getRight());
             bitCode.deleteCharAt(bitCode.length() - 1);
         }
 
     }
 
-
+    /**
+     * A method to print bit code table.
+     */
     public void printBitCodeTable() {
 
         for (Character key : bitCodeTable.keySet()) {
@@ -56,7 +77,11 @@ public class Encoder {
         }
     }
 
-
+    /**
+     * A method that returns a mep with bit code data.
+     *
+     * @return - returns a map with bit code data.
+     */
     public Map<Character, String> getBitCodeData() {
         return bitCodeTable;
     }
