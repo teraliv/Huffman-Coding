@@ -1,4 +1,8 @@
+# TCSS342 Huffman Coding
+#### Compressing string data using Huffman Coding
 
+Sample output:  
+<b>% java Tester "My Test works totally fine" </b>  
 `======================================`  
 char &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; frequency &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; code  
 `--------------------------------------`  
