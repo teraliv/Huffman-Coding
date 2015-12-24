@@ -1,8 +1,18 @@
-# TCSS342 Huffman Coding
-### Compressing string data using Huffman Coding
-
-Sample output:
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
+char | frequency | code
+---- | --------- | ----
+M    | 1         | 01111 
+y    | 2         | 1000
+     | 4         | 000
+T 	 | 1 			   | 01110
+e 	 | 2 			   | 0011
+s 	 | 2 			   | 0010
+t 	 | 3 			   | 101
+w 	 | 1 			   | 01101 
+o 	 | 2			   | 0101 
+r 	 | 1 			   | 01100 
+k 	 | 1 			   | 1111 
+a 	 | 1 			   | 1110 
+l 	 | 2 			   | 0100 
+f 	 | 1 			   | 1101 
+i 	 | 1 			   | 1100 
+n 	 | 1 			   | 1001
