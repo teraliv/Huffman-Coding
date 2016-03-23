@@ -1,5 +1,5 @@
 # TCSS342 Huffman Coding
-#### Compressing string data using Huffman Coding
+#### String compression implemented by Huffman Encoding Tree
 
 Sample output:  
 <b>% java Tester "My Test works totally fine" </b>  
